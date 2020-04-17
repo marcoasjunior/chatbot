@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import upperFirstLetter from '../utils/upperFirstLetter'
+import api from '../services/axiosConfig'
 
 Vue.use(Vuex)
 
@@ -39,13 +41,44 @@ export default new Vuex.Store({
 
     },
 
+    setBotText(state, newText) {
+
+      console.log(newText)
+
+      state.botText = newText
+
+    },
+
   },
   actions: {
 
-    changeText(context, newData) {
+    async changeText(context, newData) {
 
-      context.commit('setUsername', newData)
-      context.commit('setState', newData)
+      if (this.getters.step == 1) {
+
+        let data = upperFirstLetter(newData)
+
+        context.commit('setUsername', data)
+        context.commit('setState', 2)
+
+        await api.get(`/question/${this.getters.step}`)
+
+          .then((response) => {
+
+            context.commit('setBotText', response.data[0].question)
+
+
+          })
+          .catch(e => {
+            alert(e)
+
+          })
+
+
+
+      }
+
+
 
     },
 
