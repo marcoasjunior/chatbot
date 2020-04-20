@@ -17,7 +17,6 @@ export default new Vuex.Store({
     step: 1,
     type: 'input',
     botText: 'Meu nome é LinkBot e serei o seu guia hoje. Qual o seu nome?',
-    botAnswer: ''
 
   },
   getters: {
@@ -227,6 +226,7 @@ export default new Vuex.Store({
       }
 
       context.commit('setBotText', "Opa! Então vamos voltar ao começo do cadastro. Poderia me informar novamente o seu nome?")
+      context.commit('setType', 'input')
       context.commit('setStep', 1)
 
     },

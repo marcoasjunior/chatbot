@@ -6,9 +6,10 @@
             <Typer />
 
         </v-card-text>
-
+    <transition name="router-anim">
         <Choice v-if="getType == 'choice'" />
         <Input v-else/>
+    </transition>
 
     </v-card>
 </template>
@@ -48,6 +49,33 @@ export default {
     width: 100%;
 }
 
+.router-anim-enter-active {
+  animation: coming 1s;
+  animation-delay: .5s;
+  opacity: 0;
+}
+.router-anim-leave-active {
+  animation: going .2s;
+}
 
+@keyframes going {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-30px);
+    opacity: 0;
+  }
+}
+@keyframes coming {
+  from {
+    transform: translateY(-30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
 
 </style>
