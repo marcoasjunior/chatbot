@@ -7,7 +7,8 @@
 
         </v-card-text>
 
-        <Input />
+        <Choice v-if="getType == 'choice'" />
+        <Input v-else/>
 
     </v-card>
 </template>
@@ -16,13 +17,22 @@
 
 import Typer from '@/components/Typer.vue'
 import Input from '@/components/Input.vue'
+import Choice from '@/components/Choice.vue'
 
 export default {
 
   name: 'Chat',
+
   components: {
       Typer,
-      Input
+      Input,
+      Choice
+  },
+
+  computed: {
+      getType() {
+          return this.$store.getters.type
+      }
   },
 
 }

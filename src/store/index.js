@@ -15,6 +15,7 @@ export default new Vuex.Store({
     userEmail: '',
     userPassword: '',
     step: 1,
+    type: 'input',
     botText: 'Meu nome é LinkBot e serei o seu guia hoje. Qual o seu nome?',
     botAnswer: ''
 
@@ -26,6 +27,7 @@ export default new Vuex.Store({
     userEmail: state => state.userEmail,
     userPassword: state => state.userPassword,
     step: state => state.step,
+    type: state => state.type,
     botText: state => state.botText,
     botAnswer: state => state.botAnswer
 
@@ -34,9 +36,15 @@ export default new Vuex.Store({
   mutations: {
 
 
-    setState(state, newStep) {
+    setStep(state, newStep) {
 
       state.step = newStep
+
+    },
+
+    setType(state, newType) {
+
+      state.type = newType
 
     },
 
@@ -76,15 +84,17 @@ export default new Vuex.Store({
       let data = upperFirstLetter(newData)
 
       context.commit('setUsername', data)
-      context.commit('setState', 2)
+      context.commit('setStep', 2)
 
       return await api.get(`/question/${this.getters.step}`)
 
         .then((response) => {
 
           let question = response.data[0].question
-
+          
           let replaced = question.replace('USERNAME', this.getters.username)
+          let questionType = response.data[0].type
+          context.commit('setType', questionType)
 
           context.commit('setBotText', replaced)
 
@@ -105,7 +115,7 @@ export default new Vuex.Store({
       }
 
       context.commit('setUserCPF', formattedCpf)
-      context.commit('setState', 3)
+      context.commit('setStep', 3)
 
       return await api.get(`/question/${this.getters.step}`)
 
@@ -114,6 +124,8 @@ export default new Vuex.Store({
           let question = response.data[0].question
 
           let replaced = question.replace('USERNAME', this.getters.username)
+          let questionType = response.data[0].type
+          context.commit('setType', questionType)
 
           context.commit('setBotText', replaced)
 
@@ -132,7 +144,7 @@ export default new Vuex.Store({
       }
 
       context.commit('setUserEmail', newData)
-      context.commit('setState', 4)
+      context.commit('setStep', 4)
 
       return await api.get(`/question/${this.getters.step}`)
 
@@ -141,6 +153,8 @@ export default new Vuex.Store({
           let question = response.data[0].question
 
           let replaced = question.replace('USERNAME', this.getters.username)
+          let questionType = response.data[0].type
+          context.commit('setType', questionType)
 
           context.commit('setBotText', replaced)
 
@@ -159,7 +173,7 @@ export default new Vuex.Store({
       }
 
       context.commit('setUserPassword', newData)
-      context.commit('setState', 5)
+      context.commit('setStep', 5)
 
       return await api.get(`/question/${this.getters.step}`)
 
@@ -171,6 +185,8 @@ export default new Vuex.Store({
           let replaced2 = replaced1.replace('EMAIL', this.getters.userEmail)
           let replaced3 = replaced2.replace('CODIGO', this.getters.userCPF)
           let replaced4 = replaced3.replace('PASSWORD', this.getters.userPassword)
+          let questionType = response.data[0].type
+          context.commit('setType', questionType)
 
           context.commit('setBotText', replaced4)
 
@@ -182,7 +198,7 @@ export default new Vuex.Store({
 
     async changeText5(context, newData) {
 
-      if (newData.toLowerCase() === 'sim') {
+      if (newData === 1) {
 
         context.commit('setBotText', "Então vou salvar os seus dados")
 
@@ -200,7 +216,7 @@ export default new Vuex.Store({
               context.commit('setBotText', "Dados salvos com sucesso")
             }, 1000);
 
-            context.commit('setState', 6)
+            context.commit('setStep', 6)
             console.log(response)
 
           })
@@ -211,7 +227,7 @@ export default new Vuex.Store({
       }
 
       context.commit('setBotText', "Opa! Então vamos voltar ao começo do cadastro. Poderia me informar novamente o seu nome?")
-      context.commit('setState', 1)
+      context.commit('setStep', 1)
 
     },
 
