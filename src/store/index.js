@@ -19,6 +19,7 @@ export default new Vuex.Store({
     botText: 'Meu nome é LinkBot e serei o seu guia hoje. Qual o seu nome?',
 
   },
+
   getters: {
 
     username: state => state.username,
@@ -76,6 +77,7 @@ export default new Vuex.Store({
     },
 
   },
+  
   actions: {
 
     async changeText1(context, newData) {
