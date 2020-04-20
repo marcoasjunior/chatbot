@@ -6,45 +6,23 @@
             <Typer />
 
         </v-card-text>
-        <v-form @submit="sendAnswer">
-            <v-container class="d-flex">
 
-                <v-text-field v-model="userText" label="Type" solo></v-text-field>
+        <Input />
 
-            </v-container>
-        </v-form>
     </v-card>
 </template>
 
 <script>
 
 import Typer from '@/components/Typer.vue'
+import Input from '@/components/Input.vue'
 
 export default {
 
   name: 'Chat',
   components: {
-      Typer
-  },
-
-  data() {
-      return {
-          userText: ''
-      }
-  },
-
-  methods: {
-
-      sendAnswer(e) {
-
-          e.preventDefault();
-
-          this.$store.dispatch('changeText', this.userText)
-          
-          this.userText = ''
-
-          
-      }
+      Typer,
+      Input
   },
 
 }
