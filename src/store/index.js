@@ -1,8 +1,10 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import upperFirstLetter from '../utils/upperFirstLetter'
-import validateEmail from '../utils/validateEmail'
-import api from '../services/axiosConfig'
+import step2 from './modules/step2'
+import step3 from './modules/step3'
+import step4 from './modules/step4'
+import step5 from './modules/step5'
+import step6 from './modules/step6'
 
 Vue.use(Vuex)
 
@@ -11,11 +13,12 @@ export default new Vuex.Store({
   state: {
 
     username: '',
-    userCPF: null,
+    userCPF: '',
     userEmail: '',
     userPassword: '',
     step: 1,
     type: 'input',
+    loading: false,
     botText: 'Meu nome é LinkBot e serei o seu guia hoje. Qual o seu nome?',
 
   },
@@ -28,6 +31,7 @@ export default new Vuex.Store({
     userPassword: state => state.userPassword,
     step: state => state.step,
     type: state => state.type,
+    loading: state => state.loading,
     botText: state => state.botText,
     botAnswer: state => state.botAnswer
 
@@ -45,6 +49,12 @@ export default new Vuex.Store({
     setType(state, newType) {
 
       state.type = newType
+
+    },
+
+    setLoading(state, newData) {
+
+      state.loading = newData
 
     },
 
@@ -77,166 +87,25 @@ export default new Vuex.Store({
     },
 
   },
-  
+
   actions: {
 
-    async changeText1(context, newData) {
+    changeLoading(context) {
 
-      let data = upperFirstLetter(newData)
+      let newLoading = this.getters.loading ? false : true
 
-      context.commit('setUsername', data)
-      context.commit('setStep', 2)
-
-      return await api.get(`/question/${this.getters.step}`)
-
-        .then((response) => {
-
-          let question = response.data[0].question
-          
-          let replaced = question.replace('USERNAME', this.getters.username)
-          let questionType = response.data[0].type
-          context.commit('setType', questionType)
-
-          context.commit('setBotText', replaced)
-
-        })
-        .catch(e => {
-          alert(e)
-        })
-    },
-
-    async changeText2(context, newData) {
-
-      let formattedCpf = newData.replace(/[^\d]/g, "");
-
-      if (formattedCpf.length != 11) {
-
-        return context.commit('setBotText', "Número de CPF inválido. Poderia digitar novamente?")
-
-      }
-
-      context.commit('setUserCPF', formattedCpf)
-      context.commit('setStep', 3)
-
-      return await api.get(`/question/${this.getters.step}`)
-
-        .then((response) => {
-
-          let question = response.data[0].question
-
-          let replaced = question.replace('USERNAME', this.getters.username)
-          let questionType = response.data[0].type
-          context.commit('setType', questionType)
-
-          context.commit('setBotText', replaced)
-
-        })
-        .catch(e => {
-          alert(e)
-        })
-    },
-
-    async changeText3(context, newData) {
-
-      if (!validateEmail(newData)) {
-
-        return context.commit('setBotText', "E-mail inválido. Poderia digitar novamente?")
-
-      }
-
-      context.commit('setUserEmail', newData)
-      context.commit('setStep', 4)
-
-      return await api.get(`/question/${this.getters.step}`)
-
-        .then((response) => {
-
-          let question = response.data[0].question
-
-          let replaced = question.replace('USERNAME', this.getters.username)
-          let questionType = response.data[0].type
-          context.commit('setType', questionType)
-
-          context.commit('setBotText', replaced)
-
-        })
-        .catch(e => {
-          alert(e)
-        })
-    },
-
-    async changeText4(context, newData) {
-
-      if (newData.length < 6) {
-
-        return context.commit('setBotText', "A senha deve ter no mínimo 6 caracteres")
-
-      }
-
-      context.commit('setUserPassword', newData)
-      context.commit('setStep', 5)
-
-      return await api.get(`/question/${this.getters.step}`)
-
-        .then((response) => {
-
-          let question = response.data[0].question
-
-          let replaced1 = question.replace('USERNAME', this.getters.username)
-          let replaced2 = replaced1.replace('EMAIL', this.getters.userEmail)
-          let replaced3 = replaced2.replace('CODIGO', this.getters.userCPF)
-          let replaced4 = replaced3.replace('PASSWORD', this.getters.userPassword)
-          let questionType = response.data[0].type
-          context.commit('setType', questionType)
-
-          context.commit('setBotText', replaced4)
-
-        })
-        .catch(e => {
-          alert(e)
-        })
-    },
-
-    async changeText5(context, newData) {
-
-      if (newData === 1) {
-
-        context.commit('setBotText', "Então vou salvar os seus dados")
-
-        return await api.post(`/user`, {
-            name: this.getters.username,
-            cpf: this.getters.userCPF,
-            email: this.getters.userEmail,
-            password: this.getters.userPassword
-
-          })
-
-          .then((response) => {
-
-            setTimeout(() => {
-              context.commit('setBotText', "Dados salvos com sucesso")
-            }, 1000);
-
-            context.commit('setStep', 6)
-            console.log(response)
-
-          })
-          .catch(e => {
-            alert(e)
-          })
-
-      }
-
-      context.commit('setBotText', "Opa! Então vamos voltar ao começo do cadastro. Poderia me informar novamente o seu nome?")
-      context.commit('setType', 'input')
-      context.commit('setStep', 1)
+      context.commit('setLoading', newLoading)
 
     },
-
-
 
   },
 
-  modules: {}
+  modules: {
+    step2,
+    step3,
+    step4,
+    step5,
+    step6,
+  }
 
 })

@@ -3,23 +3,9 @@
         <v-form @submit="sendAnswer">
             <v-container class="d-flex flex-column mb-6">
 
-                <v-container v-if="test" class="d-flex justify-center">
+                <v-container class="ma-0">
 
-                    <v-btn class="ma-0 pa-0 mx-2 mt-n6" :loading="loading" :disabled="loading" color="primary"
-                        @click="loader = 'loading'">
-                        Sim
-                    </v-btn>
-
-                    <v-btn class="ma-0 pa-0 mx-2 mt-n6" :loading="loading" :disabled="loading" color="error"
-                        @click="loader = 'loading'">
-                        Não
-                    </v-btn>
-
-                </v-container>
-
-                <v-container v-else class="ma-0">
-
-                    <v-text-field append-outer-icon="mdi-send" @click:append-outer="sendAnswer" v-model="userText"
+                    <v-text-field append-outer-icon="mdi-send" @click:append-outer="sendAnswer" v-model="userText" :readonly="getLoading"
                         label="Type" solo></v-text-field>
 
                 </v-container>
@@ -37,8 +23,7 @@ export default {
     data() {
         return {
             userText: '',
-            loading: false,
-            test: false
+
         }
     },
 
@@ -48,6 +33,7 @@ export default {
 
             e.preventDefault();
 
+            this.$store.dispatch(`changeLoading`)
             this.$store.dispatch(`changeText${this.getState}`, this.userText)
             this.userText = ''
 
@@ -57,7 +43,11 @@ export default {
     computed: {
         getState: function () {
             return this.$store.getters.step
-        }
+        },
+
+        getLoading: function () {
+            return this.$store.getters.loading
+        },
     },
 }
 </script>
