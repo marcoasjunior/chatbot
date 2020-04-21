@@ -7,8 +7,11 @@
 
         </v-card-text>
     <transition name="router-anim">
-        <Choice v-if="getType == 'choice'" />
+
+        <Choice v-if="getType === 'choice'" />
+        <MultiChoices v-else-if="getType === 'multichoices'" />
         <Input v-else/>
+
     </transition>
 
     </v-card>
@@ -19,6 +22,7 @@
 import Typer from '@/components/Typer.vue'
 import Input from '@/components/Input.vue'
 import Choice from '@/components/Choice.vue'
+import MultiChoices from '@/components/MultiChoices.vue'
 
 export default {
 
@@ -27,7 +31,8 @@ export default {
   components: {
       Typer,
       Input,
-      Choice
+      Choice,
+      MultiChoices
   },
 
   computed: {

@@ -3,36 +3,62 @@ import api from '../../services/axiosConfig'
 export default {
 
     actions: {
-        async changeText4(context, newData) {
 
-            if (newData.length < 6) {
+        async changeText5(context, newData) {
 
-                return context.commit('setBotText', "A senha deve ter no mínimo 6 caracteres")
+            if (newData === 1) {
+
+                context.commit('setBotText', "Então vou salvar os seus dados")
+
+                await api.post(`/user`, {
+                        name: this.getters.username,
+                        cpf: this.getters.userCPF,
+                        email: this.getters.userEmail,
+                        password: this.getters.userPassword
+
+                    })
+
+                    .then(() => {
+
+                        setTimeout(() => {
+                            context.commit('setBotText', "Dados salvos com sucesso")
+                        }, 2000);
+
+                        context.commit('setStep', 6)
+                        context.commit('setLoading', false)
+
+                    })
+                    .catch(e => {
+                        alert(e)
+                    })
+
+                return await api.get(`/question/${this.getters.step}`)
+
+                    .then((response) => {
+
+                        let question = response.data[0].question
+                        let questionType = response.data[0].type
+                        let multiChoices = response.data[0].multiChoices
+
+                        context.commit('setType', questionType)
+                        context.commit('setMultiChoices', multiChoices)
+                        context.commit('setLoading', false)
+                        context.commit('setBotText', question)
+
+                    })
+                    .catch(e => {
+                        alert(e)
+                    })
+
+
+            } else {
+
+                context.commit('setBotText', "Opa! Então vamos voltar ao começo do cadastro. Poderia me informar novamente o seu nome?")
+                context.commit('setLoading', false)
+                context.commit('setType', 'input')
+                context.commit('setStep', 1)
 
             }
-
-            context.commit('setUserPassword', newData)
-            context.commit('setStep', 5)
-
-            return await api.get(`/question/${this.getters.step}`)
-
-                .then((response) => {
-
-                    let question = response.data[0].question
-
-                    let replaced1 = question.replace('USERNAME', this.getters.username)
-                    let replaced2 = replaced1.replace('EMAIL', this.getters.userEmail)
-                    let replaced3 = replaced2.replace('CODIGO', this.getters.userCPF)
-                    let replaced4 = replaced3.replace('PASSWORD', this.getters.userPassword)
-                    let questionType = response.data[0].type
-                    context.commit('setType', questionType)
-                    context.commit('setLoading', false)
-                    context.commit('setBotText', replaced4)
-
-                })
-                .catch(e => {
-                    alert(e)
-                })
         }
     }
 }

@@ -1,37 +1,38 @@
 import api from '../../services/axiosConfig'
-import validateEmail from '../../utils/validateEmail'
 
 export default {
 
     actions: {
+        async changeText4(context, newData) {
 
-        async changeText3(context, newData) {
+            if (newData.length < 6) {
 
-            if (!validateEmail(newData)) {
-
-                return context.commit('setBotText', "E-mail inválido. Poderia digitar novamente?")
+                return context.commit('setBotText', "A senha deve ter no mínimo 6 caracteres")
 
             }
 
-            context.commit('setUserEmail', newData)
-            context.commit('setStep', 4)
+            context.commit('setUserPassword', newData)
+            context.commit('setStep', 5)
 
             return await api.get(`/question/${this.getters.step}`)
 
                 .then((response) => {
 
                     let question = response.data[0].question
-
-                    let replaced = question.replace('USERNAME', this.getters.username)
                     let questionType = response.data[0].type
+
+                    let replaced1 = question.replace('USERNAME', this.getters.username)
+                    let replaced2 = replaced1.replace('EMAIL', this.getters.userEmail)
+                    let replaced3 = replaced2.replace('CODIGO', this.getters.userCPF)
+                    let replaced4 = replaced3.replace('PASSWORD', this.getters.userPassword)
                     context.commit('setType', questionType)
                     context.commit('setLoading', false)
-                    context.commit('setBotText', replaced)
+                    context.commit('setBotText', replaced4)
 
                 })
                 .catch(e => {
                     alert(e)
                 })
-        },
+        }
     }
 }

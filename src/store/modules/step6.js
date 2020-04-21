@@ -4,7 +4,7 @@ export default {
 
     actions: {
 
-        async changeText5(context, newData) {
+        async changeText6(context, newData) {
 
             if (newData === 1) {
 
@@ -18,7 +18,7 @@ export default {
 
                     })
 
-                    .then((response) => {
+                    .then(() => {
 
                         setTimeout(() => {
                             context.commit('setBotText', "Dados salvos com sucesso")
@@ -26,7 +26,6 @@ export default {
 
                         context.commit('setStep', 6)
                         context.commit('setLoading', false)
-                        console.log(response)
 
                     })
                     .catch(e => {

@@ -1,27 +1,27 @@
 import api from '../../services/axiosConfig'
+import validateEmail from '../../utils/validateEmail'
 
 export default {
 
     actions: {
-        async changeText2(context, newData) {
 
-            let formattedCpf = newData.replace(/[^\d]/g, "");
+        async changeText3(context, newData) {
 
-            if (formattedCpf.length != 11) {
-                
-                context.commit('setLoading', false)
-                return context.commit('setBotText', "Número de CPF inválido. Poderia digitar novamente?")
+            if (!validateEmail(newData)) {
+
+                return context.commit('setBotText', "E-mail inválido. Poderia digitar novamente?")
 
             }
 
-            context.commit('setUserCPF', formattedCpf)
-            context.commit('setStep', 3)
+            context.commit('setUserEmail', newData)
+            context.commit('setStep', 4)
 
             return await api.get(`/question/${this.getters.step}`)
 
                 .then((response) => {
 
                     let question = response.data[0].question
+
                     let replaced = question.replace('USERNAME', this.getters.username)
                     let questionType = response.data[0].type
                     context.commit('setType', questionType)
@@ -32,6 +32,6 @@ export default {
                 .catch(e => {
                     alert(e)
                 })
-        }
+        },
     }
 }

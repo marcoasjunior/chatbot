@@ -1,10 +1,10 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import step1 from './modules/step1'
 import step2 from './modules/step2'
 import step3 from './modules/step3'
 import step4 from './modules/step4'
 import step5 from './modules/step5'
-import step6 from './modules/step6'
 
 Vue.use(Vuex)
 
@@ -18,6 +18,7 @@ export default new Vuex.Store({
     userPassword: '',
     step: 1,
     type: 'input',
+    multiChoices: null,
     loading: false,
     botText: 'Meu nome é LinkBot e serei o seu guia hoje. Qual o seu nome?',
 
@@ -31,6 +32,7 @@ export default new Vuex.Store({
     userPassword: state => state.userPassword,
     step: state => state.step,
     type: state => state.type,
+    multiChoices: state => state.multiChoices,
     loading: state => state.loading,
     botText: state => state.botText,
     botAnswer: state => state.botAnswer
@@ -49,6 +51,12 @@ export default new Vuex.Store({
     setType(state, newType) {
 
       state.type = newType
+
+    },
+
+    setMultiChoices(state, newData) {
+
+      state.multiChoices = newData
 
     },
 
@@ -101,11 +109,11 @@ export default new Vuex.Store({
   },
 
   modules: {
+    step1,
     step2,
     step3,
     step4,
     step5,
-    step6,
   }
 
 })
