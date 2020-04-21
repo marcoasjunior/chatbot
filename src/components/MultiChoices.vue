@@ -1,10 +1,10 @@
 <template>
     <div>
-        <v-container class="d-flex justify-center">
+        <v-container class="d-flex flex-column justify-center">
 
             <v-list dense>
                 <v-list-item-group v-model="items" color="primary">
-                    <v-list-item v-for="(item, i) in getMultiChoices" :key="i">
+                    <v-list-item v-for="(item, i) in getMultiChoices" :key="i" @click="sendAnswer">
                         <v-list-item-icon>
                             <v-icon v-text="item.icon"></v-icon>
                         </v-list-item-icon>
@@ -15,11 +15,15 @@
                 </v-list-item-group>
             </v-list>
 
+            <Datepicker />
+
         </v-container>
     </div>
 </template>
 
 <script>
+
+import Datepicker from './DatePicker'
 
 export default {
     name: "MultiChoices",
@@ -47,6 +51,10 @@ export default {
             return this.$store.getters.multiChoices
         },
     },
+
+    components: {
+    Datepicker
+    }
 }
 </script>
 

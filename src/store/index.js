@@ -106,6 +106,15 @@ export default new Vuex.Store({
 
     },
 
+    changeStep (context, newData) {
+
+      let step = newData + this.getters.step
+
+      context.commit('setStep', step)
+      
+      
+    }
+
   },
 
   modules: {

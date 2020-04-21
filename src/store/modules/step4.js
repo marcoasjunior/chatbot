@@ -6,7 +6,8 @@ export default {
         async changeText4(context, newData) {
 
             if (newData.length < 6) {
-
+                
+                context.commit('setLoading', false)
                 return context.commit('setBotText', "A senha deve ter no mínimo 6 caracteres")
 
             }

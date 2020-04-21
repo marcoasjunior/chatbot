@@ -1,20 +1,34 @@
 <template>
-    <v-card class="mx-auto card">
-        <v-card-text>
-            <div>ChatBot</div>
+  <v-card class="mx-auto card">
+    <v-card-text>
+      <div>ChatBot</div>
 
-            <Typer />
+      <Typer />
 
-        </v-card-text>
+    </v-card-text>
     <transition name="router-anim">
-
+      
+      <v-container class="d-flex">
         <Choice v-if="getType === 'choice'" />
         <MultiChoices v-else-if="getType === 'multichoices'" />
-        <Input v-else/>
+        <Input v-else />
+      </v-container>
 
     </transition>
 
-    </v-card>
+    <v-card-actions>
+      <v-container class="d-flex justify-space-between">
+        <v-btn class="ma-2" color="teal" icon @click="goBack">
+          <v-icon>mdi-chevron-left</v-icon>
+        </v-btn>
+        <v-btn class="ma-2" color="teal" icon @click="goForward">
+          <v-icon>mdi-chevron-right</v-icon>
+        </v-btn>
+      </v-container>
+    </v-card-actions>
+
+  </v-card>
+
 </template>
 
 <script>
@@ -35,7 +49,23 @@ export default {
       MultiChoices
   },
 
+  methods: {
+
+    goBack() {
+
+      this.$store.dispatch(`changeStep`, -1)
+
+    },
+
+    goForward() {
+
+      this.$store.dispatch(`changeStep`, 1)
+
+    }
+  },
+
   computed: {
+    
       getType() {
           return this.$store.getters.type
       }

@@ -9,6 +9,7 @@ export default {
 
             if (!validateEmail(newData)) {
 
+                context.commit('setLoading', false)
                 return context.commit('setBotText', "E-mail inválido. Poderia digitar novamente?")
 
             }

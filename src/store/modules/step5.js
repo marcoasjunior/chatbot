@@ -8,8 +8,6 @@ export default {
 
             if (newData === 1) {
 
-                context.commit('setBotText', "Então vou salvar os seus dados")
-
                 await api.post(`/user`, {
                         name: this.getters.username,
                         cpf: this.getters.userCPF,
@@ -19,10 +17,6 @@ export default {
                     })
 
                     .then(() => {
-
-                        setTimeout(() => {
-                            context.commit('setBotText', "Dados salvos com sucesso")
-                        }, 2000);
 
                         context.commit('setStep', 6)
                         context.commit('setLoading', false)
