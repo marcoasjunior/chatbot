@@ -5,6 +5,8 @@ import step2 from './modules/step2'
 import step3 from './modules/step3'
 import step4 from './modules/step4'
 import step5 from './modules/step5'
+import appointment from './modules/appointment'
+import user from './modules/user'
 
 Vue.use(Vuex)
 
@@ -113,7 +115,13 @@ export default new Vuex.Store({
       context.commit('setStep', step)
       
       
-    }
+    },
+
+    changeText0 (context, newData) {
+
+      context.commit('setBotText', newData)     
+     
+    },
 
   },
 
@@ -123,6 +131,8 @@ export default new Vuex.Store({
     step3,
     step4,
     step5,
+    appointment,
+    user
   }
 
 })

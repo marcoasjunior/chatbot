@@ -1,12 +1,12 @@
 <template>
-  <v-card class="mx-auto card">
+  <v-card class="mx-auto card" :loading="getLoading">
     <v-card-text>
-      <div>ChatBot</div>
+      <div>Linkbot</div>
 
       <Typer />
 
     </v-card-text>
-    <transition name="router-anim">     
+    <transition name="anime">     
         <Choice v-if="getType === 'choice'" />
         <MultiChoices v-else-if="getType === 'multichoices'" />
         <Input v-else />
@@ -65,7 +65,11 @@ export default {
     
       getType() {
           return this.$store.getters.type
-      }
+      },
+
+      getLoading: function () {
+            return this.$store.getters.loading
+        },
   },
 
 }
@@ -81,12 +85,12 @@ export default {
     width: 100%;
 }
 
-.router-anim-enter-active {
+.anime-enter-active {
   animation: coming 1s;
   animation-delay: .5s;
   opacity: 0;
 }
-.router-anim-leave-active {
+.anime-leave-active {
   animation: going .2s;
 }
 

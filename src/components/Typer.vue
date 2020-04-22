@@ -1,7 +1,7 @@
 <template>
     <div>
         <v-container>
-            <VueTyper :text='getBotText' :repeat='0' />
+            <VueTyper :text='getBotText' :repeat='0' :type-delay=45 />
         </v-container>
     </div>
 </template>
