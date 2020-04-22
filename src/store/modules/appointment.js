@@ -19,10 +19,12 @@ export default {
 
                     console.log(response)
                     context.commit('setBotText', `Sua consulta ficou marcada para ${formatData}.`)
+                    context.commit('setLoading', false)
 
                 })
                 .catch(e => {
                     alert(e)
+                    context.commit('setLoading', false)
                 })
          }
     }
