@@ -10,7 +10,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item in items" :key="item.name">
+        <tr v-for="item in items" :key="item">
           <td>{{ item.date | dateFormat }}</td>
           <td>{{ item.date | hourFormat }}</td>
           <td>{{ item.status }}</td>
