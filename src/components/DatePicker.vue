@@ -1,12 +1,28 @@
 <template>
-  <v-row>
-
-    <v-date-picker v-model="date1" full-width show-current locale="pt-BR"></v-date-picker>
-        <v-col class="lg-offset8" md="12" lg="4">
-      <v-time-picker v-model="e7" format="24hr"></v-time-picker>
-    </v-col>
-
-  </v-row>
+       <v-menu
+        ref="menu"
+        v-model="menu"
+        :close-on-content-click="false"
+        :return-value.sync="date"
+        transition="scale-transition"
+        offset-y
+        min-width="290px"
+      >
+        <template v-slot:activator="{ on }">
+          <v-text-field
+            v-model="date"
+            label="Data"
+            prepend-icon="mdi-calendar"
+            readonly
+            v-on="on"
+          ></v-text-field>
+        </template>
+        <v-date-picker v-model="date" no-title scrollable>
+          <v-spacer></v-spacer>
+          <v-btn text color="primary" @click="menu = false">Cancel</v-btn>
+          <v-btn text color="primary" @click="$refs.menu.save(date)">OK</v-btn>
+        </v-date-picker>
+      </v-menu>
 </template>
 
 <script>
@@ -17,7 +33,8 @@
     data () {
       return {
 
-        date1: new Date().toISOString().substr(0, 10),
+        date: new Date().toISOString().substr(0, 10),
+        menu: false,
 
       }
     },

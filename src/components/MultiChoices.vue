@@ -3,7 +3,7 @@
         <v-container class="d-flex flex-column justify-center">
 
             <v-list dense>
-                <v-list-item-group v-model="items" color="primary">
+                <v-list-item-group v-model="choice" color="primary">
                     <v-list-item v-for="(item, i) in getMultiChoices" :key="i" @click="sendAnswer">
                         <v-list-item-icon>
                             <v-icon v-text="item.icon"></v-icon>
@@ -14,35 +14,45 @@
                     </v-list-item>
                 </v-list-item-group>
             </v-list>
-
-            <Datepicker />
-
+            <v-conteiner class="d-flex flex-column" v-if="reveal === 'date'">
+                <DatePicker />
+                <TimePicker />
+                <v-btn depressed small>Marcar</v-btn>
+            </v-conteiner>
         </v-container>
     </div>
 </template>
 
 <script>
 
-import Datepicker from './DatePicker'
+import DatePicker from './DatePicker'
+import TimePicker from './TimePicker'
 
 export default {
+
     name: "MultiChoices",
+
     data() {
         return {
-            items: null
+            choice: null,
+            date: null,
+            reveal: ''
         }
     },
 
     methods: {
 
-        sendAnswer(choice) {
+        sendAnswer() {
 
-            this.$store.dispatch(`changeText${this.getState}`, choice)
+            if (this.choice === 0) return this.reveal = 'date'
+            if (this.choice === 1) return this.reveal = ''
+            if (this.choice === 2) return this.reveal = ''
 
         },
     },
 
     computed: {
+
         getState: function () {
             return this.$store.getters.step
         },
@@ -53,7 +63,8 @@ export default {
     },
 
     components: {
-    Datepicker
+    DatePicker,
+    TimePicker
     }
 }
 </script>

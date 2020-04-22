@@ -6,13 +6,10 @@
       <Typer />
 
     </v-card-text>
-    <transition name="router-anim">
-      
-      <v-container class="d-flex">
+    <transition name="router-anim">     
         <Choice v-if="getType === 'choice'" />
         <MultiChoices v-else-if="getType === 'multichoices'" />
         <Input v-else />
-      </v-container>
 
     </transition>
 
