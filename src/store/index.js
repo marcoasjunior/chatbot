@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import step1 from './modules/step1'
+import step1a from './modules/step1a'
+import step1b from './modules/step1b'
 import step2 from './modules/step2'
 import step3 from './modules/step3'
 import step4 from './modules/step4'
@@ -19,10 +21,10 @@ export default new Vuex.Store({
     userEmail: '',
     userPassword: '',
     step: 1,
-    type: 'input',
+    type: 'choice',
     multiChoices: null,
     loading: false,
-    botText: 'Meu nome é LinkBot e serei o seu guia hoje. Qual o seu nome?',
+    botText: ['Meu nome é LinkBot e serei o seu guia hoje.', 'Você já se cadastrou no sistema?'],
 
   },
 
@@ -127,6 +129,8 @@ export default new Vuex.Store({
 
   modules: {
     step1,
+    step1a,
+    step1b,
     step2,
     step3,
     step4,

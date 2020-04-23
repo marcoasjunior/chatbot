@@ -9,6 +9,7 @@
     <transition name="anime">     
         <Choice v-if="getType === 'choice'" />
         <MultiChoices v-else-if="getType === 'multichoices'" />
+        <FormLogin v-else-if="getType === 'form'" />
         <Input v-else />
 
     </transition>
@@ -34,6 +35,7 @@ import Typer from '@/components/Typer.vue'
 import Input from '@/components/Input.vue'
 import Choice from '@/components/Choice.vue'
 import MultiChoices from '@/components/MultiChoices.vue'
+import FormLogin from '@/components/FormLogin.vue'
 
 export default {
 
@@ -43,7 +45,8 @@ export default {
       Typer,
       Input,
       Choice,
-      MultiChoices
+      MultiChoices,
+      FormLogin
   },
 
   methods: {
