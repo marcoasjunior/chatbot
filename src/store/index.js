@@ -24,7 +24,7 @@ export default new Vuex.Store({
     type: 'choice',
     multiChoices: null,
     loading: false,
-    botText: ['Meu nome é LinkBot e serei o seu guia hoje.', 'Você já se cadastrou no sistema?'],
+    botText: 'Meu nome é LinkBot e serei o seu guia hoje. Você já tem cadastro no nosso sistema?',
 
   },
 
