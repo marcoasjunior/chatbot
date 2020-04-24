@@ -7,7 +7,7 @@
         <v-col cols="12" sm="6">
 
           <v-text-field
-            label="Nome"
+            label="CPF"
             prepend-icon="mdi-account"
             v-model="login"
           ></v-text-field>
@@ -16,7 +16,7 @@
         <v-col cols="12" sm="6">
 
           <v-text-field
-            label="e-mail"
+            label="Senha"
             prepend-icon="mdi-lock"
             v-model="password"
             :type="show1 ? 'text' : 'password'"

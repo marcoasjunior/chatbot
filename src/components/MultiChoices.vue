@@ -49,7 +49,7 @@ export default {
         sendAnswer(e) {
 
             if (e.target.innerText == 'MARCAR CONSULTA') return this.reveal = 'date'
-            if (e.target.innerText == 'VERIFICAR HORÁRIO')  return this.reveal = 'table'
+            if (e.target.innerText == 'CONFIRMAR HORÁRIO')  return this.reveal = 'table'
             if (e.target.innerText == 'MODIFICAR DADOS') return this.reveal = 'form'
 
 

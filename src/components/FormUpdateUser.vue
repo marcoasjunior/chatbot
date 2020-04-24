@@ -99,15 +99,15 @@ export default {
 
     async getData() {
 
-      let id = '5e9dd4ede9a3e529a06ce062'
+      let id = localStorage.id
 
       await api.get(`/user/${id}`)
         .then((response) => {
 
-          this.namePh = response.data[0].name
-          this.emailPh = response.data[0].email
-          this.whatsappPh = response.data[0].whatsapp
-          this.passwordPh = response.data[0].password
+          this.namePh = response.data.name
+          this.emailPh = response.data.email
+          this.whatsappPh = response.data.whatsapp
+          this.passwordPh = response.data.password
 
         })
 
