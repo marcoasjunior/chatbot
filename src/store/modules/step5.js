@@ -16,10 +16,15 @@ export default {
 
                     })
 
-                    .then(() => {
+                    .then((response) => {
+
+                        if (response.data.errors) return alert('Ocorreu um erro no seu cadastro. Recarregue a página.')
 
                         context.commit('setStep', 6)
                         context.commit('setLoading', false)
+                        console.log(response.data)
+
+                        localStorage.id = response.data._id
 
                     })
                     .catch(() => {

@@ -31,15 +31,16 @@ export default {
               context.commit('setBotText', question)
 
             })
-            .catch(e => {
-              alert('Erro no Login', e)
+            .catch((e) => {
+              alert(e)
               context.commit('setLoading', false)
             })
 
 
         })
-        .catch(e => {
-          alert(e)
+        .catch(() => {
+          alert('Erro no login. Por favor, verifique seus dados.')         
+          context.commit('setLoading', false)
         })
 
 

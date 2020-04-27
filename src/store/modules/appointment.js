@@ -6,13 +6,13 @@ export default {
     actions: {
         async registerAppointment(context, newData) {
 
-            let formatData = moment(newData).format('DD/MM/YYYY HH:mm')
+            let formatData = moment(newData.date).format('DD/MM/YYYY HH:mm')
 
             console.log(formatData)
 
             await api.post(`/appointment/`, {
-                date: newData,
-                user: '5e9dd4ede9a3e529a06ce062' // PRECISA REFATORAR
+                date: formatData,
+                user: newData.user
             })
 
                 .then((response) => {

@@ -68,8 +68,10 @@ export default {
       let data = new Date(this.getDateTime)
 
       this.$store.dispatch(`changeLoading`)
-      this.$store.dispatch(`registerAppointment`, data)
-
+      this.$store.dispatch(`registerAppointment`, {
+        date: data,
+        user: localStorage.id
+      })
     }
   },
 }

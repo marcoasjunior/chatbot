@@ -17,7 +17,7 @@
         <v-col cols="12" sm="6">
 
           <v-text-field
-            label="e-mail"
+            label="E-mail"
             :placeholder='emailPh'
             prepend-icon="mdi-email"
             v-model="email"

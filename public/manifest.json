@@ -1,7 +1,7 @@
 {
 	"name" : "link-chatbot",
 	"short_name" : "link-chatbot",
-	"theme_color" : "#6200ea",
+	"theme_color" : "##F5F5F5",
 	"icons" : [
 		{
             "src": "img/icons/icon-72x72.png",
