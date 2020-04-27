@@ -3,7 +3,7 @@ import api from '../../services/axiosConfig'
 export default {
 
     actions: {
-        async changeText4(context, newData) {
+        async changeText4(context, newData) { // SENHA
 
             if (newData.length < 6) {
                 

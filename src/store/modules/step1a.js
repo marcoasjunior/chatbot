@@ -5,7 +5,7 @@ export default {
 
 actions: {
 
-    async changeText1a(context, newData) {
+    async changeText1a(context, newData) { // NOME
 
         let data = upperFirstLetter(newData)
   

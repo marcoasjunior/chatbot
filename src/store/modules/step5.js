@@ -4,7 +4,7 @@ export default {
 
     actions: {
 
-        async changeText5(context, newData) {
+        async changeText5(context, newData) { // CONFIRMAÇÃO
 
             if (newData === 1) {
 
@@ -22,8 +22,8 @@ export default {
                         context.commit('setLoading', false)
 
                     })
-                    .catch(e => {
-                        alert(e)
+                    .catch(() => {
+                        alert('Ocorreu um erro no seu cadastro. Por favor, recarregue a página.')
                     })
 
                 return await api.get(`/question/${this.getters.step}`)
@@ -50,7 +50,7 @@ export default {
                 context.commit('setBotText', "Opa! Então vamos voltar ao começo do cadastro. Poderia me informar novamente o seu nome?")
                 context.commit('setLoading', false)
                 context.commit('setType', 'input')
-                context.commit('setStep', 1)
+                context.commit('setStep', '1a')
 
             }
         }

@@ -1,7 +1,7 @@
 <template>
   <v-card class="mx-auto card" :loading="getLoading">
     <v-card-text>
-      <div>Linkbot</div>
+      <span class="subtitle-1">Linkbot</span>
 
       <Typer />
 
@@ -14,7 +14,7 @@
 
     </transition>
 
-    <v-card-actions>
+    <!-- <v-card-actions>
       <v-container class="d-flex justify-space-between">
         <v-btn class="ma-2" color="teal" icon @click="goBack">
           <v-icon>mdi-chevron-left</v-icon>
@@ -23,7 +23,7 @@
           <v-icon>mdi-chevron-right</v-icon>
         </v-btn>
       </v-container>
-    </v-card-actions>
+    </v-card-actions> -->
 
   </v-card>
 
@@ -51,17 +51,19 @@ export default {
 
   methods: {
 
-    goBack() {
+    // goBack() {
+      
+    //   this.$store.dispatch(`changeText${this.getState - 1}`)
+    //   this.$store.dispatch(`changeStep`, -1)
 
-      this.$store.dispatch(`changeStep`, -1)
+    // },
 
-    },
+    // goForward() {
 
-    goForward() {
+    //   this.$store.dispatch(`changeText${this.getState + 1}`)
+    //   this.$store.dispatch(`changeStep`, 1)
 
-      this.$store.dispatch(`changeStep`, 1)
-
-    }
+    // }
   },
 
   computed: {

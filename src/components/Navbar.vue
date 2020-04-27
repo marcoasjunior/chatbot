@@ -1,17 +1,14 @@
 <template>
   <div>
     <v-app-bar
-      color="deep-purple accent-4"
+      color="grey darken-1"
       dense
+      flat
       dark
     >
-      <v-app-bar-nav-icon></v-app-bar-nav-icon>
-
-      <v-toolbar-title>Chatbot</v-toolbar-title>
-
-      <v-spacer></v-spacer>
-
-      
+      <v-spacer/>
+      <v-toolbar-title class="d-flex"><v-icon>mdi-head-flash-outline</v-icon></v-toolbar-title>
+     <v-spacer/>
     </v-app-bar>
   </div>
 </template>

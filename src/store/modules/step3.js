@@ -5,7 +5,7 @@ export default {
 
     actions: {
 
-        async changeText3(context, newData) {
+        async changeText3(context, newData) { //EMAIL
 
             if (!validateEmail(newData)) {
 

@@ -4,7 +4,7 @@ export default {
 
 actions: {
 
-    async changeText1(context, newData) { 
+    async changeText1(context, newData) {  // LOGIN
 
         if (newData === 2) {
 

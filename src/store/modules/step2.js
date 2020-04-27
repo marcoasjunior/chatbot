@@ -3,7 +3,7 @@ import api from '../../services/axiosConfig'
 export default {
 
     actions: {
-        async changeText2(context, newData) {
+        async changeText2(context, newData) { // CPF
 
             let formattedCpf = newData.replace(/[^\d]/g, "");
 

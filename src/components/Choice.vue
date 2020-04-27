@@ -2,12 +2,12 @@
     <div>
             <v-container class="d-flex justify-center">
 
-                    <v-btn class="mx-7 " :loading="loading" :disabled="loading" color="primary"
+                    <v-btn class="mx-7 " :loading="loading" :disabled="loading"  
                         @click="sendAnswer(1)">
                         Sim
                     </v-btn>
 
-                    <v-btn class="mx-7 " :loading="loading" :disabled="loading" color="error"
+                    <v-btn class="mx-7 " :loading="loading" :disabled="loading" dark
                         @click="sendAnswer(2)">
                         Não
                     </v-btn>

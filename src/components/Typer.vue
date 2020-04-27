@@ -5,7 +5,7 @@
 
     <transition name="anime">
 
-    <span class="subtitle-1"
+    <span class="subtitle-1 font-weight-bold"
     >
      {{getBotText}} 
     </span>

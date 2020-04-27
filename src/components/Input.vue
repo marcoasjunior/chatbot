@@ -6,7 +6,7 @@
                 <v-container class="ma-0">
 
                     <v-text-field append-outer-icon="mdi-send" @click:append-outer="sendAnswer" v-model="userText" :readonly="getLoading"
-                        label="Type" solo></v-text-field>
+                        label="..." solo></v-text-field>
 
                 </v-container>
 

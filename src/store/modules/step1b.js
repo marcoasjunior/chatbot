@@ -14,7 +14,7 @@ export default {
           console.log(response.data)
 
           localStorage.id = response.data
-          context.commit('setStep', 6)
+          context.commit('setStep', '6a')
           context.commit('setLoading', false)
 
           api.get(`/question/${this.getters.step}`)
