@@ -6,7 +6,8 @@
       <template v-slot:activator="{ on }">
         <v-text-field v-model="computedDateFormattedMomentjs" label="Data" prepend-icon="mdi-calendar" readonly v-on="on"></v-text-field>
       </template>
-      <v-date-picker v-model="date" no-title scrollable>
+      <v-date-picker v-model="date" no-title scrollable min="2020-04" :allowed-dates="allowedDates"
+      max="2020-06">
         <v-spacer></v-spacer>
         <v-btn text color="primary" @click="menu1 = false">Cancelar</v-btn>
         <v-btn text color="primary" @click="$refs.menu1.save(date)">Ok</v-btn>
@@ -72,7 +73,9 @@ export default {
         date: data,
         user: localStorage.id
       })
-    }
+    },
+
+     allowedDates: val => parseInt(val.split('-')[2], 10) % 2 === 0,
   },
 }
 </script>
