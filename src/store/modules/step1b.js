@@ -32,7 +32,8 @@ export default {
 
             })
             .catch(e => {
-              alert(e)
+              alert('Erro no Login', e)
+              context.commit('setLoading', false)
             })
 
 
