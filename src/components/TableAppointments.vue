@@ -10,7 +10,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item in items" :key="item">
+        <tr v-for="(item, i) in items" :key="i">
           <td>{{ item.date | dateFormat }}</td>
           <td>{{ item.date | hourFormat }}</td>
           <td>{{ item.status }}</td>
@@ -59,7 +59,7 @@ export default {
 
     async getData() {
 
-      let id = '5e9dd4ede9a3e529a06ce062'
+      let id = localStorage.id
 
       await api.get(`/appointment/${id}`)
         .then((response) => {

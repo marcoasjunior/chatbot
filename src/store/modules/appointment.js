@@ -11,8 +11,8 @@ export default {
             console.log(formatData)
 
             await api.post(`/appointment/`, {
-                date: formatData,
-                user: newData.user
+                date: newData.date,
+                user: newData.user 
             })
 
                 .then((response) => {
